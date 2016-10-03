@@ -12,11 +12,9 @@
  */
 package org.graylog.plugins.backup.strategy;
 
+import com.google.common.base.Throwables;
 import com.google.common.collect.Lists;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
-
 import org.graylog.plugins.backup.BackupException;
 import org.graylog.plugins.backup.RestoreException;
 import org.graylog.plugins.backup.model.BackupStruct;
@@ -25,15 +23,9 @@ import org.slf4j.LoggerFactory;
 import org.zeroturnaround.zip.ZipUtil;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipException;
-import java.util.zip.ZipOutputStream;
 
 
 public class FsBackupStrategy extends AbstractMongoBackupStrategy
@@ -42,6 +34,8 @@ public class FsBackupStrategy extends AbstractMongoBackupStrategy
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
 
     private static Logger LOG = LoggerFactory.getLogger(FsBackupStrategy.class);
+
+    private final static String RESTORE_FOLDER = "graylog";
 
 
     public FsBackupStrategy(BackupStruct backupStruct)
@@ -60,7 +54,7 @@ public class FsBackupStrategy extends AbstractMongoBackupStrategy
         try
         {
             processCommand(commands);
-            zipFile( );
+            pack( );
         }
         catch (Exception e)
         {
@@ -68,17 +62,45 @@ public class FsBackupStrategy extends AbstractMongoBackupStrategy
         }
     }
 
+
+    public void unpack(String path) throws RestoreException
+    {
+        File[] fileList = new File(path).listFiles( );
+
+        if (fileList.length != 1)
+        {
+            LOG.error("There is 0 or more then 1 files in the restore folder {}",
+                path);
+            Throwables.propagate(new RestoreException("There is 0 or more then 1 files in the restore "));
+        }
+
+        if (fileList[0].getName( ).endsWith("zip"))
+        {
+            ZipUtil.unpack(new File(backupStruct.getSourcePath( ) + File.separator + fileList[0].getName( )), new File(backupStruct.getSourcePath( ) + File.separator + RESTORE_FOLDER));
+        }
+        else
+        {
+            LOG.error("There is no zip file in {} ", path);
+            throw new RestoreException("Please check zip file");
+        }
+
+    }
+
+
     @Override
     public void restoreData() throws RestoreException
     {
+        unpack(backupStruct.getSourcePath( ));
 
         StringBuilder restoreStr = new StringBuilder(backupStruct.getMongoInstallPath( ))
             .append(File.separator)
             .append("mongorestore")
             .append(" ")
+            .append("-d").append(" ").append("graylog")
+            .append(" ")
             .append(backupStruct.getSourcePath( ))
             .append(File.separator)
-            .append("graylog");
+            .append(RESTORE_FOLDER);
 
         List<String> commands = Lists.newArrayList( );
         commands.add(osShellPath( ));
@@ -87,11 +109,13 @@ public class FsBackupStrategy extends AbstractMongoBackupStrategy
         try
         {
             processCommand(commands);
+            FileUtils.deleteDirectory(new File(backupStruct.getSourcePath( ) + File.separator+ RESTORE_FOLDER));
         }
         catch (Exception e)
         {
             throw new RestoreException("Error during restore data", e);
         }
+
 
     }
 
@@ -103,7 +127,7 @@ public class FsBackupStrategy extends AbstractMongoBackupStrategy
     }
 
     @Override
-    protected void zipFile() throws Exception
+    protected void pack() throws Exception
     {
         LocalDateTime now = LocalDateTime.now( );
         String dateFormat = now.format(formatter);

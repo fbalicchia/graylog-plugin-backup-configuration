@@ -12,8 +12,8 @@
  */
 package org.graylog.plugins.backup.service.impl;
 
+import com.google.common.base.Throwables;
 import org.apache.commons.lang3.StringUtils;
-
 import org.graylog.plugins.backup.BackupConfiguration;
 import org.graylog.plugins.backup.BackupException;
 import org.graylog.plugins.backup.RestoreException;
@@ -27,13 +27,9 @@ import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.attribute.FileTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -90,7 +86,9 @@ public class BackupServiceImpl implements BackupService
 
         if (!Files.exists(Paths.get(backupStruct.getSourcePath( ))))
         {
-            throw new RestoreException("Dest folder doesn't exists ");
+            LOG.error("Cannot access to directory at {}, please check the permissions",
+                backupStruct.getSourcePath( ));
+            Throwables.propagate(new RestoreException("Dest folder doesn't exists "));
         }
 
         BackupStrategy backupStrategy = BackupFactoryStrategy.create(backupStruct);

@@ -32,7 +32,7 @@ public abstract class AbstractMongoBackupStrategy implements BackupStrategy
 
     protected BackupStruct backupStruct;
 
-    protected abstract void zipFile() throws Exception;
+    protected abstract void pack() throws Exception;
 
 
     protected String osShellPath()

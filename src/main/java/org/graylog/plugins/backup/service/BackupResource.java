@@ -56,17 +56,20 @@ public class BackupResource extends RestResource implements PluginRestResource
     @POST
     @Path("launchrestore")
     @Timed
-    @ApiOperation(value = "Backing up graylog config data")
+    @ApiOperation(value = "Restore config data")
     @ApiResponses(value = {
-        @ApiResponse(code = 202, message = "backup configuration was triggered.")
+        @ApiResponse(code = 202, message = "Restore config done")
     })
     @Produces(MediaType.APPLICATION_JSON)
-    public Response launchBackup()
+    public Response launchRestore()
     {
         try
         {
-            LOG.info("Graylog backup manual perform");
+            LOG.info("Graylog restore perform");
             BackupConfiguration aDefault = clusterConfigService.getOrDefault(BackupConfiguration.class, BackupConfiguration.defaultConfig( ));
+
+            LOG.info("Restore configuration {}",aDefault.toString());
+
             backupService.restore(aDefault);
             return Response.accepted( ).build( );
         }

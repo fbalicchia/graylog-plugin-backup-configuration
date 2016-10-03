@@ -35,11 +35,10 @@ adapt configuration to your environment. If not specified back data is saved und
 Backup file follow the this naming convention graylogyyyyMMddHHmm.zip
 Now is supported only *nix console and backup can be stored on file system. In the near feature will be supported s3 storage.
 
-At the moment restore data is not immediate, but is possible following the next step :
+For restore data is necessary to put backup file under restore folder.
+At the moment there is a limitation that under restore folder there is only zip
+without any directory.
 
-* to unzip backup file and put it in graylog directory under restore folder.
-  for example graylog20161001.zip need to be renamend under folder /restore in graylog and unzip the file.
-  Result will be ../data/restore/graylog
 * Under System-configuration press `Restore data button`.
 
 
