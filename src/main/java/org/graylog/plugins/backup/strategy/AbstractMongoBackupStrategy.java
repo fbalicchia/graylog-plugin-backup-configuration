@@ -17,11 +17,9 @@ import org.graylog.plugins.backup.model.BackupStruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.zip.ZipException;
 
 
 public abstract class AbstractMongoBackupStrategy implements BackupStrategy
@@ -53,7 +51,7 @@ public abstract class AbstractMongoBackupStrategy implements BackupStrategy
 
         ProcessBuilder pb = new ProcessBuilder(command);
         pb.redirectErrorStream(true);
-        Process backupCommand = pb.start( );
+        Process p = pb.start( );
 
         Timer timeOut = new Timer( );
         timeOut.schedule(new TimerTask( )
@@ -61,14 +59,26 @@ public abstract class AbstractMongoBackupStrategy implements BackupStrategy
             @Override
             public void run()
             {
-                backupCommand.destroy( );
-                LOG.error("Mongo backup goes in timeout");
+                if(p.isAlive())
+                {
+                    LOG.warn("restore process take more than 15 sec I'll destroy it");
+                    p.destroy( );
+                }
             }
-        }, 10000);
 
-        backupCommand.waitFor( );
+            //this parameter need to be configurable
+
+        }, 15000);
+
+        p.waitFor( );
         timeOut.cancel( );
+
     }
+
+
+
+
+
 }
 
 

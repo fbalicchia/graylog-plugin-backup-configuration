@@ -39,7 +39,11 @@ For restore data is necessary to put backup file under restore folder.
 At the moment there is a limitation that under restore folder there is only zip
 without any directory.
 
-* Under System-configuration press `Restore data button`.
+* Under System-configuration press `Restore data button`. If something fails the system show the corresponding error
+
+Please note that the owner and group of zip file need to be the same of graylog server process.
+
+
 
 
 Getting started

@@ -37,6 +37,8 @@ public class FsBackupStrategy extends AbstractMongoBackupStrategy
 
     private final static String RESTORE_FOLDER = "graylog";
 
+    private final static String GRAYLOG_SCHEMA_NAME = "graylog";
+
 
     public FsBackupStrategy(BackupStruct backupStruct)
     {
@@ -71,12 +73,25 @@ public class FsBackupStrategy extends AbstractMongoBackupStrategy
         {
             LOG.error("There is 0 or more then 1 files in the restore folder {}",
                 path);
-            Throwables.propagate(new RestoreException("There is 0 or more then 1 files in the restore "));
+            Throwables.propagate(new RestoreException("There is 0 or more then 1 files in the restore folder. Please drop in only Zip file "));
         }
 
         if (fileList[0].getName( ).endsWith("zip"))
         {
-            ZipUtil.unpack(new File(backupStruct.getSourcePath( ) + File.separator + fileList[0].getName( )), new File(backupStruct.getSourcePath( ) + File.separator + RESTORE_FOLDER));
+            File source = new File(backupStruct.getSourcePath( ) + File.separator + fileList[0].getName( ));
+
+            if (source.canRead( ) && source.canWrite( ))
+            {
+                ZipUtil.unpack(source, new File(backupStruct.getSourcePath( ) + File.separator + RESTORE_FOLDER));
+            }
+            else
+            {
+                LOG.error("Please check permission on file {} ",
+                    backupStruct.getSourcePath( ) + File.separator + fileList[0].getName( ));
+                Throwables.propagate(new RestoreException("File permission problem "));
+            }
+
+
         }
         else
         {
@@ -102,6 +117,8 @@ public class FsBackupStrategy extends AbstractMongoBackupStrategy
             .append(File.separator)
             .append(RESTORE_FOLDER);
 
+        LOG.info("Command lunch {} ", restoreStr.toString( ));
+
         List<String> commands = Lists.newArrayList( );
         commands.add(osShellPath( ));
         commands.add("-c");
@@ -109,7 +126,6 @@ public class FsBackupStrategy extends AbstractMongoBackupStrategy
         try
         {
             processCommand(commands);
-            FileUtils.deleteDirectory(new File(backupStruct.getSourcePath( ) + File.separator+ RESTORE_FOLDER));
         }
         catch (Exception e)
         {
@@ -131,8 +147,8 @@ public class FsBackupStrategy extends AbstractMongoBackupStrategy
     {
         LocalDateTime now = LocalDateTime.now( );
         String dateFormat = now.format(formatter);
-        String srcFolder = backupStruct.getTargetPath( ) + File.separator + "graylog";
-        String dstFolder = backupStruct.getTargetPath( ) + File.separator + "graylog" + dateFormat + ".zip";
+        String srcFolder = backupStruct.getTargetPath( ) + File.separator + GRAYLOG_SCHEMA_NAME;
+        String dstFolder = backupStruct.getTargetPath( ) + File.separator + GRAYLOG_SCHEMA_NAME + dateFormat + ".zip";
         ZipUtil.pack(new File(srcFolder), new File(dstFolder));
         LOG.info("Graylog config backup completed");
         FileUtils.deleteDirectory(new File(srcFolder));
