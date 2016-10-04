@@ -12,7 +12,7 @@
 
     <groupId>org.graylog.plugins</groupId>
     <artifactId>graylog-plugin-backup-configuration</artifactId>
-    <version>1.0.0-beta.1-SNAPSHOT</version>
+    <version>1.0.0-beta.1</version>
     <packaging>jar</packaging>
 
     <name>${project.artifactId}</name>
@@ -30,7 +30,7 @@
         <connection>scm:git:https://github.com/fbalicchia/graylog-plugin-backup-configuration.git</connection>
         <developerConnection>scm:git:https://github.com/fbalicchia/graylog-plugin-backup-configuration.git</developerConnection>
         <url>https://github.com/https://github.com/fbalicchia/graylog-plugin-backup-configuration.git</url>
-        <tag>HEAD</tag>
+        <tag>1.0.0-beta.1</tag>
     </scm>
 
     <properties>
