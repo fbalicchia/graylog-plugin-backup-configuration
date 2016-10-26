@@ -13,7 +13,7 @@
 
     <groupId>org.graylog.plugins</groupId>
     <artifactId>graylog-plugin-backup-configuration</artifactId>
-    <version>1.0.0-beta.2-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>${project.artifactId}</name>

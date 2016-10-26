@@ -19,8 +19,6 @@ before_deploy:
   - echo "Deploying release to GitHub releases"
 deploy:
   provider: releases
-  api_key:
-    secure: <enter your encrypted GitHub access token>
   file:
     - "${RELEASE_PKG_FILE}"
     - "${RELEASE_DEB_FILE}"
@@ -29,3 +27,5 @@ deploy:
   on:
     tags: true
     jdk: oraclejdk8
+  api-key:
+    secure: mpJkNYEaO19WEQow8D7lUQqhqL2AE+gMN2DCN3w+6lSTP2fWXOO4ckF/exC1Rkrxftj/OO0qU/OmlzAUtkditmDyggmwx7uZyt1rlk4Doli+WNftcuFJkMruXsWq+i4/s7MAcck/09ccllfbr3bJ9Y4flMkJO+eajmqLLN77lNgOmQSlqRqd9OFtta3HSzzQTtUlmzzApwdHfzC5bI+bT6ZTzZaUsunfxfufouUOcPFUvIXFaGGbmBsooQs2yX0pvFXVcflrhbaiWlhZEkBZdSXgHCLkz3APvSH0SqO3Ni1Lx2Vw27RIRU/gK8P9OYlkJFB4iev20L2CCWEp7ZYCKLsAd0acO4Pa22NxqVAqOcOawSHqwSiMBHxudSzlfky9uu5wrOUJ463cqUjN72OuFjV4sJyO9nMB8njLdjsNd1AJwI8IJMTQkImbhkCiShWeBu4a0MoZDEROMbsHpTZdCrzP7hWICK7lU0e2p0EOctxnB3SyyGkrthZuethRDiwRejZlXtDofZhuJg9rX8GMA7D47Pd+GAV+1IJOpbQ404jOLUXNhlnBlNYvR10iSFQFGc98viICGYG7B11g9kYKJgt/GHGHnCaS4Rb2cUQjR28VLg49UhzSdXy8xufBwQLi7L19Wp1vPZ1gUy+CG3g/WL0PQ5zeEuJ5CZ4bzD/BwYg=
