@@ -1,31 +1,32 @@
-sudo: false
+sudo: required
 dist: trusty
 language: java
 jdk:
-  - oraclejdk8
- install:
-  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -Dskip.web.build=true -B -V
- script:
-  - mvn test -Dskip.web.build=true -B
+- oraclejdk8
+install:
+- mvn install -DskipTests=true -Dmaven.javadoc.skip=true -Dskip.web.build=true -B
+  -V
+script:
+- mvn test -Dskip.web.build=true -B
 addons:
   apt:
     packages:
-      - rpm
+    - rpm
 before_deploy:
-  - mvn jdeb:jdeb && export RELEASE_DEB_FILE=$(ls target/*.deb)
-  - mvn rpm:rpm && export RELEASE_RPM_FILE=$(find target/ -name '*.rpm' | tail -1)
-  - rm -f target/original-*.jar
-  - export RELEASE_PKG_FILE=$(ls target/*.jar)
-  - echo "Deploying release to GitHub releases"
+- mvn jdeb:jdeb && export RELEASE_DEB_FILE=$(ls target/*.deb)
+- mvn rpm:rpm && export RELEASE_RPM_FILE=$(find target/ -name '*.rpm' | tail -1)
+- rm -f target/original-*.jar
+- export RELEASE_PKG_FILE=$(ls target/*.jar)
+- echo "Deploying release to GitHub releases"
 deploy:
   provider: releases
   file:
-    - "${RELEASE_PKG_FILE}"
-    - "${RELEASE_DEB_FILE}"
-    - "${RELEASE_RPM_FILE}"
+  - "${RELEASE_PKG_FILE}"
+  - "${RELEASE_DEB_FILE}"
+  - "${RELEASE_RPM_FILE}"
   skip_cleanup: true
   on:
     tags: true
     jdk: oraclejdk8
   api-key:
-    secure: mpJkNYEaO19WEQow8D7lUQqhqL2AE+gMN2DCN3w+6lSTP2fWXOO4ckF/exC1Rkrxftj/OO0qU/OmlzAUtkditmDyggmwx7uZyt1rlk4Doli+WNftcuFJkMruXsWq+i4/s7MAcck/09ccllfbr3bJ9Y4flMkJO+eajmqLLN77lNgOmQSlqRqd9OFtta3HSzzQTtUlmzzApwdHfzC5bI+bT6ZTzZaUsunfxfufouUOcPFUvIXFaGGbmBsooQs2yX0pvFXVcflrhbaiWlhZEkBZdSXgHCLkz3APvSH0SqO3Ni1Lx2Vw27RIRU/gK8P9OYlkJFB4iev20L2CCWEp7ZYCKLsAd0acO4Pa22NxqVAqOcOawSHqwSiMBHxudSzlfky9uu5wrOUJ463cqUjN72OuFjV4sJyO9nMB8njLdjsNd1AJwI8IJMTQkImbhkCiShWeBu4a0MoZDEROMbsHpTZdCrzP7hWICK7lU0e2p0EOctxnB3SyyGkrthZuethRDiwRejZlXtDofZhuJg9rX8GMA7D47Pd+GAV+1IJOpbQ404jOLUXNhlnBlNYvR10iSFQFGc98viICGYG7B11g9kYKJgt/GHGHnCaS4Rb2cUQjR28VLg49UhzSdXy8xufBwQLi7L19Wp1vPZ1gUy+CG3g/WL0PQ5zeEuJ5CZ4bzD/BwYg=
+    secure: XaTXBpkGY3z9usbo1ZJweaSHNql9RE8hpW6nLNmNXxT4jVnlkxL+caiyHOCYTqTNvnC1b5Vy/6wubDuy4XwExvNpmyAbQaZkDjvwimVEUC2mcFCXRxz3D9aCu6hvaQfCnY/BQzEde1lccLPnawfnfkXeY1joDOPV07/RRmVPyw6GeTbR4EtgiKo+lqw/VhA1hAV3zLti239ZpaIYEF6Zvy4mJ9/+qTrEcCB5yFtSim0aTRVwOo8StgKIcd2I32Re1+IIq6NNj/PTLkNWUMjefDkmlJ99YwfdDRqmco0CI2fY/UxWmVOCxLgqFQd+KZd/cXDMa7qtrexjXt0ObZXLldZhE5RtvvggjkxGqbHp60FdQ/pbMn811Ox79FWnFUHNrCeNLWyMfchosnul6EjKV3yIEQJ+glIUBMthT0gjWZiO9iF3IHQ5b0TXaphLoy8cf23AsCAMQsuj4bWo9Q1XJTEXXfQU9dj1v5eHHuA/fScHIKG44cv68uoWxQggmhg7cZ4CELN6uR9pbLoGiyatUO4BeGKBQ720/roHfD/hNmMoZ3O3x9yGQ+V10g3XhbtFW1XhI8b9jaKWY/31dNVvAXAyBIYIO9vvWV+pAfgm+54A9hCGhRysz2DR/BNGf87nKcePMjw7BJNNY+lpDPuEtc+1TvzcKDAls55QEJ3f5kM=
