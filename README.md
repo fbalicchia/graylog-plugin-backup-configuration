@@ -10,7 +10,7 @@ At the moment is supported only unix-like os and dump can be stored only on file
 Installation
 ------------
 
-[Download the plugin](https://github.com/https://github.com/fbalicchia/graylog-plugin-backup-configuration.git/releases)
+[Download the plugin](https://github.com/fbalicchia/graylog-plugin-backup-configuration/releases)
 and place the `.jar` file in your Graylog plugin directory. The plugin directory
 is the `plugins/` folder relative from your `graylog-server` directory by default
 and can be configured in your `graylog.conf` file.
