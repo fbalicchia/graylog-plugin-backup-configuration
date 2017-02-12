@@ -17,17 +17,17 @@ import static org.joda.time.DateTimeFieldType.*;
  * This is the plugin. Your class should implement one of the existing plugin
  * interfaces. (i.e. AlarmCallback, MessageInput, MessageOutput)
  */
-public class BackupConfigPeriodical extends Periodical
+public class BackupConfigurationPeriodical extends Periodical
 {
 
     private BackupService backupService;
 
     private ClusterConfigService clusterConfigService;
 
-    private static final Logger LOG = org.slf4j.LoggerFactory.getLogger(BackupConfigPeriodical.class);
+    private static final Logger LOG = org.slf4j.LoggerFactory.getLogger(BackupConfigurationPeriodical.class);
 
     @Inject
-    public BackupConfigPeriodical(BackupService backupService, ClusterConfigService clusterConfigService)
+    public BackupConfigurationPeriodical(BackupService backupService, ClusterConfigService clusterConfigService)
     {
         this.backupService = backupService;
         this.clusterConfigService = clusterConfigService;

@@ -6,7 +6,7 @@ import ObjectUtils from 'util/ObjectUtils';
 import BackupActions from "components/BackupActions";
 import BackupStore from "components/BackupStore";
 
-const BackupConfigurationInfo = React.createClass({
+const BackupConfiguration = React.createClass({
   propTypes: {
     config: React.PropTypes.object,
     updateConfig: React.PropTypes.func.isRequired,
@@ -166,4 +166,4 @@ getInitialState() {
   },
 });
 
-export default BackupConfigurationInfo;
+export default BackupConfiguration;

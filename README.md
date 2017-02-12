@@ -5,7 +5,9 @@
 This plugin provides the possibility of saving and restore graylog environment configurations like registered user, dashboard, input etc.etc. To do this task the plugin uses directly **mongorestore** and **mongodump** command.
 At the moment is supported only unix-like os and dump can be stored only on filesystem and not on other Storage Service like s3 etc.etc
 
-**Required Graylog version:** 2.0 and later
+Any feedback are well come !
+
+**Required Graylog version:** 2.1 and later
 
 Installation
 ------------
@@ -16,7 +18,11 @@ is the `plugins/` folder relative from your `graylog-server` directory by defaul
 and can be configured in your `graylog.conf` file.
 Restart `graylog-server` and you are done.
 
-There is no yet a "ufficial" realease but is possibile to compile source like any other plugin 
+"Official" release is cut around the last Graylog build of plugins release in this case 2.1.2, nothing prevents to compile it independently using 
+for example rc or beta version. In the same way binary package install jar under folder '/usr/share/graylog-server/plugin'
+
+To adapt it to yours environment just change 'graylog.version' and 'graylog.plugin-dir' properties in pom file 
+
 
 Usage
 -----

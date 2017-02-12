@@ -74,11 +74,6 @@ public abstract class AbstractMongoBackupStrategy implements BackupStrategy
         timeOut.cancel( );
 
     }
-
-
-
-
-
 }
 
 

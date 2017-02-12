@@ -11,17 +11,17 @@ import java.util.Set;
 /**
  * Implement the PluginMetaData interface here.
  */
-public class BackupConfigMetaData implements PluginMetaData {
+public class BackupConfigurationMetaData implements PluginMetaData {
     private static final String PLUGIN_PROPERTIES = "org.graylog.plugins.graylog-plugin-backup-configuration/graylog-plugin.properties";
 
     @Override
     public String getUniqueId() {
-        return "org.graylog.plugins.BackupConfigPlugin";
+        return "org.graylog.plugins.backup.BackupConfigurationPlugin";
     }
 
     @Override
     public String getName() {
-        return "BackupConfig";
+        return "BackupConfiguration";
     }
 
     @Override
@@ -31,7 +31,7 @@ public class BackupConfigMetaData implements PluginMetaData {
 
     @Override
     public URI getURL() {
-        return URI.create("https://github.com/https://github.com/fbalicchia");
+        return URI.create("https://github.com/fbalicchia/graylog-plugin-backup-configuration.git");
     }
 
     @Override
@@ -41,7 +41,8 @@ public class BackupConfigMetaData implements PluginMetaData {
 
     @Override
     public String getDescription() {
-        return "Pluging for backup and restore graylog configuration";
+        // TODO Insert correct plugin description
+        return "Description of BackupConfiguration plugin";
     }
 
     @Override

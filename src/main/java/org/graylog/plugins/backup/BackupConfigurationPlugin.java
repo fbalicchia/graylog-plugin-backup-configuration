@@ -10,14 +10,14 @@ import java.util.Collections;
 /**
  * Implement the Plugin interface here.
  */
-public class BackupConfigPlugin implements Plugin {
+public class BackupConfigurationPlugin implements Plugin {
     @Override
     public PluginMetaData metadata() {
-        return new BackupConfigMetaData();
+        return new BackupConfigurationMetaData();
     }
 
     @Override
     public Collection<PluginModule> modules () {
-        return Collections.<PluginModule>singletonList(new BackupConfigModule());
+        return Collections.<PluginModule>singletonList(new BackupConfigurationModule());
     }
 }

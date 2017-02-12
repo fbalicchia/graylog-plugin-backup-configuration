@@ -1,6 +1,5 @@
 package org.graylog.plugins.backup;
 
-
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -15,8 +14,7 @@ import javax.annotation.Nullable;
 @AutoValue
 @JsonDeserialize(builder = AutoValue_BackupConfiguration.Builder.class)
 @JsonAutoDetect
-public abstract class BackupConfiguration
-{
+public abstract class BackupConfiguration {
     public static Builder builder()
     {
         return new AutoValue_BackupConfiguration.Builder( );
@@ -79,8 +77,5 @@ public abstract class BackupConfiguration
         @JsonProperty("number_of_day_before")
         public abstract Builder numberOfDaysBefore(Integer numberOfDaysBefore);
 
-
-
     }
-
 }

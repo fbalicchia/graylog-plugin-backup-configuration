@@ -16,7 +16,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.mock;
 
 
-public class BackConfigPeriodicalTest
+public class BackConfigurationPeriodicalTest
 {
     @Mock
     private BackupConfiguration backupConfigurationMock;
@@ -45,7 +45,7 @@ public class BackConfigPeriodicalTest
             .backupPath(StringUtils.EMPTY)
             .lastbackupTime(Tools.nowUTC( )).build( );
 
-        BackupConfigPeriodical configuration = new BackupConfigPeriodical(null, null);
+        BackupConfigurationPeriodical configuration = new BackupConfigurationPeriodical(null, null);
         assertThat(configuration.canStartBackup(testinfo)).isFalse( );
 
         DateTime lastBackup = new DateTime(2016, 9, 26, 22, 56, 0, 0);
