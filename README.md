@@ -49,6 +49,13 @@ Otherwise if process ends successfully
 [![](https://github.com/fbalicchia/graylog-plugin-backup-configuration/blob/master/images/backconfig_restore.png)]
 
 
+`Simple configuration example`
+* threshold PT1M (every minute)
+* Enable backup Process
+* Select directory where you want to save data for example /tmp/data/bck and /tmp/data/restore
+* find where MongoDump is installed. On ubuntu, for example, by default is under */usr/bin*
+
+To restore your data please put the zip in this restore folder in this case /tmp/data/restore then from GUI click restore data
 
 
 
