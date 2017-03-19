@@ -21,7 +21,8 @@ Restart `graylog-server` and you are done.
 "Official" release is cut around the last Graylog build of plugins release in this case 2.1.2, nothing prevents to compile it independently using 
 for example rc or beta version. In the same way binary package install jar under folder '/usr/share/graylog-server/plugin'
 
-To adapt it to yours environment just change 'graylog.version' and 'graylog.plugin-dir' properties in pom file 
+To adapt it to yours environment just change 'graylog.version' and 'graylog.plugin-dir' properties in pom file
+the is created using a third library and not '-gzip' flag introduced with 3.2 Mongo's version
 
 
 Usage

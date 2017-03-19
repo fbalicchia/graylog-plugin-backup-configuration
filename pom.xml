@@ -47,6 +47,7 @@
         <junit.version>4.12</junit.version>
         <autovale.version>1.3</autovale.version>
         <zzip.version>1.9</zzip.version>
+        <awssdk.version>1.11.105</awssdk.version>
     </properties>
 
 
@@ -122,8 +123,11 @@
             <artifactId>zt-zip</artifactId>
             <version>${zzip.version}</version>
         </dependency>
-
-
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk</artifactId>
+            <version>${awssdk.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
