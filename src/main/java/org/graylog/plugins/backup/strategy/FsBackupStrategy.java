@@ -139,6 +139,7 @@ public class FsBackupStrategy extends AbstractMongoBackupStrategy
     {
         StringBuilder result = new StringBuilder(backupStruct.getMongoInstallPath( ));
         result.append(File.separator).append("mongodump").append(" -d graylog").append(" -o ").append(backupStruct.getTargetPath( ));
+        result.append(" ").append("--dumpDbUsersAndRoles");
         return result.toString( );
     }
 
