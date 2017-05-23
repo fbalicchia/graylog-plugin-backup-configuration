@@ -1,6 +1,8 @@
 # BackupConfig Plugin for Graylog
 
-[![Build Status](https://api.travis-ci.org/fbalicchia/graylog-plugin-backup-configuration.svg?branch=master)](https://travis-ci.org/https://github.com/fbalicchia/graylog-plugin-backup-configuration.git)
+[![Build Status](https://api.travis-ci.org/fbalicchia/graylog-plugin-backup-configuration.svg?branch=master)](https://travis-ci.org/fbalicchia/graylog-plugin-backup-configuration.git)
+[![Github Downloads](https://img.shields.io/github/downloads/fbalicchia/graylog-plugin-backup-configuration/total.svg)](https://github.com/fbalicchia/graylog-plugin-backup-configuration/releases)
+
 
 This plugin provides the possibility of saving and restore graylog environment configurations like registered user, dashboard, input etc.etc. To do this task the plugin uses directly **mongorestore** and **mongodump** command.
 At the moment is supported only unix-like os and dump can be stored only on filesystem and not on other Storage Service like s3 etc.etc
