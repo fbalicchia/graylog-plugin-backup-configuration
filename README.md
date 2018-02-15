@@ -1,4 +1,4 @@
-# This project is now ARCHIVED e not maintained. Feel free to fork it and improve 
+# This project is now ARCHIVED and not maintained. Feel free to fork it and improve 
 
 # BackupConfig Plugin for Graylog
 
