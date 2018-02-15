@@ -1,3 +1,5 @@
+# This project is now ARCHIVED e not maintained. Feel free to fork it and improve 
+
 # BackupConfig Plugin for Graylog
 
 [![Build Status](https://api.travis-ci.org/fbalicchia/graylog-plugin-backup-configuration.svg?branch=master)](https://travis-ci.org/fbalicchia/graylog-plugin-backup-configuration.git)
